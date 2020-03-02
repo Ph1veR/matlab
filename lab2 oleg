@@ -1,0 +1,38 @@
+%% 2.Laboratorijas darbs
+% Olegs Silcenkovs REBMO(2)
+%% Darba uzdevumi
+% * 1.ir jāatrisina ar solve, pašu izteiksmi un rezultātu ielikt atskaitē
+% * verbatim sadaļā matlabā "pretty" funkcijas ģenerēta izskatā
+% * 2. ja F(x)-? jāmeklē integrālis, ja f'(x) jāmeklē atvasinājums
+% * (protams ar matlaba simbolisko paketi)
+% * gan sākuma izteiksmi, gan rezultātu attēlot uz viena grafika, grafikam
+% * virsū uzlikt legend ar abām formulām "latex izskatā", līdzīgi kā to esam
+% * darījuši laboratorijas darba laikā
+
+syms a b c x;
+solve (c+b*x+a*(sqrt(x)))==0, x
+pretty(ans)
+% Atrodiet integresanu f(x) = F(x)=(-(cos(x)-1)/(x-sin(x))^2)
+F(x)=int(-(cos(x)-1)/(x-sin(x))^2)
+% Uzzimet intervala x(pi,5*pi) ar funkciju plot
+syms x;
+y = (-(cos(x)-1)/(x-sin(x))^2);
+yd = simplify(int(y))
+yv = vectorize(y)
+ydv = vectorize(yd)
+x = pi:0.1:5*pi;
+yvm = -(cos(x)-1)./(x-sin(x)).^2;
+ydvm = -1./(x - sin(x));
+yvm = eval(yv);
+ydvm = eval(ydv);
+plot(x,yvm,x,ydvm)
+a = latex(y)
+b = latex(yd)
+text(12,0.1,['$$',a,'$$'],'Interpreter','latex','FontSize',16);
+h = legend(['$',a,'$'],['$',b,'$']);
+set(h,'Interpreter','latex','FontSize',16)
+% Secinajums: Saja darba iemacijos izpildit funkcijas integresana
+% matlab vide
+% Ar int-integresanas funkcija un diff-atvasinasanas funkcija
+% Ar tiem komandiem ir loti vienkarsi rekinat matematiskas piemerus
+% Iemacijos darboties ar sadiem komandiem un sapratu ka pareizi izmantot.   
